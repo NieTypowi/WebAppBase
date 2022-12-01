@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mainStore } from '~/store/index'
+import { authStore } from '~/store/auth'
 export default {
     data(){
         return{
@@ -23,14 +23,14 @@ export default {
     },
     computed:{
         result(){
-            return mainStore().getRegisterRes
+            return authStore().getRegisterRes
         }
     },
     methods:{
         register(){
             if (this.username && this.password) {
                 console.log({username:this.username, password:this.password, confirmedPassword:this.password});
-                mainStore().register({username:this.username, password:this.password, confirmedPassword:this.password})
+                authStore().register({username:this.username, password:this.password, confirmedPassword:this.password})
             }
         }
     }

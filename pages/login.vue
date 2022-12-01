@@ -3,19 +3,36 @@
         <div class="p-5 bg-white">
             <h1 class="text-4xl mb-5"> Login </h1>
             <form method="post" @submit.prevent="login" class="w-full max-w-md">
-                <input type="text" name="username" id="username" placeholder="User name" class="input-field">
-                <input type="text" name="password" id="password" placeholder="Password" class="input-field">
+                <input v-model="username" type="text" name="username" id="username" placeholder="User name" class="input-field">
+                <input v-model="password" type="text" name="password" id="password" placeholder="Password" class="input-field">
                 <button class="button-default"> Login </button>
+                <p v-if="message">{{message}}</p>
             </form>
         </div>
     </div>
 </template>
 
 <script>
+import { authStore } from '~/store/auth'
+
 export default {
+    data(){
+        return{
+            username:'',
+            password:''
+        }
+    },
+    computed:{
+        message(){
+            return authStore().getLoginRes
+        },
+    },
     methods:{
         login(){
-            console.log('login form sent');
+            if (this.username && this.password) {
+                console.log({username:this.username, password:this.password});
+                authStore().login({username:this.username, password:this.password})
+            }
         }
     }
 }
