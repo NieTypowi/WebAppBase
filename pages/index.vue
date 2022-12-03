@@ -3,8 +3,8 @@
     <div class="relative z-10 h-full flex flex-col pointer-events-none">
       <top-bar class="pointer-events-auto" />
       <div class="flex-grow flex justify-between max-w-full overflow-hidden pointer-events-none">
-        <sidepanel />
-        <sidepanel :on-right="true" />
+        <panel-main />
+        <panel-stats />
       </div>
     </div>
     <div class="absolute z-0 inset-0">
