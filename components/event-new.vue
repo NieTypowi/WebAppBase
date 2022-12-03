@@ -31,7 +31,7 @@
       <div class="pt-5">
         <span class="block">Select event type:</span>
         <div class="inline-block mr-5">
-          <input type="radio" id="typeChoice1" name="type" value="work" class="peer appearance-none" />
+          <input type="radio" id="typeChoice1" name="type" value="work" class="peer appearance-none hidden" />
           <label
             for="typeChoice1"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-pink-main/40 border border-pink-main opacity-100 rounded-full transition duration-200 peer-checked:text-white"
@@ -39,7 +39,7 @@
           >
         </div>
         <div class="inline-block mr-5">
-          <input type="radio" id="typeChoice2" name="type" value="life" class="peer appearance-none" />
+          <input type="radio" id="typeChoice2" name="type" value="life" class="peer appearance-none hidden" />
           <label
             for="typeChoice2"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-blue-light/40 border border-blue-light rounded-full transition duration-200 peer-checked:text-white"
@@ -56,7 +56,8 @@
           />
         </div>
         <button @click="submit()" class="button-default">save</button>
-        <p>Position set on map: lat:{{ lat }} lang:{{ lng }}</p>
+        <p v-if="lat && lng" class="text-lg">Position set on map: lat:{{ lat }} lang:{{ lng }}</p>
+        <p v-else class="text-xl text-center">*Point a place on map!</p>
       </div>
     </form>
   </div>
