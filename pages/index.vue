@@ -57,7 +57,6 @@ export default {
     panelTouchEnd() {
       const element = this.$refs["panels"];
       element.style.transitionDuration = "150ms";
-      console.log(this.mobilePanelPos);
       if (this.mobilePanelPos < 75) {
         element.style.transform = `translateY(0)`;
         element.classList.remove("rounded-t-3xl");

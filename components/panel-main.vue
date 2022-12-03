@@ -173,7 +173,7 @@
         </div>
       </div>
       <div
-        class="relative p-5 backdrop-blur-md bg-white/80 border transition duration-300 rounded-r-2xl pointer-events-auto"
+        class="relative p-5 pl-20 backdrop-blur-md bg-white/80 border transition duration-300 rounded-r-2xl pointer-events-auto"
         :class="[collapsed ? '-translate-x-full border-transparent' : 'translate-x-[-56px] border-blue-main']"
       >
         <div class="absolute top-0 right-0" @click="toggleCollapse()">bck</div>
@@ -181,7 +181,13 @@
         <!-- <div v-for="item in items">
             <slot name="item" v-bind="item"></slot>
           </div> -->
-        <div class="w-[200px] md:w-[300px]"></div>
+        <ul class="w-[200px] lg:w-[300px]">
+          <li class="w-full">
+            <section-events />
+          </li>
+          <li class="w-full"></li>
+          <li class="w-full"></li>
+        </ul>
       </div>
     </div>
   </div>
