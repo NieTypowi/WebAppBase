@@ -2,18 +2,66 @@
   <div class="w-full md:border-0">
     <h2>Statistics</h2>
     <div class="flex flex-wrap">
-      <div v-if="events">Dane</div>
-      <p v-else class="p-5 mx-auto font-light">No data to work with. Add some events!</p>
+    
+      <canvas class="w-full min-h-[300px]" id="myChart"></canvas>
     </div>
   </div>
 </template>
 
 <script>
+import Chart from "chart.js/auto";
+
+import { dataStore } from "~/store/data";
 export default {
-  data() {
-    return {
-      events: null,
-    };
+  watch:{
+    userEvents(newEvents){
+      if (newEvents) {
+        console.log(newEvents);
+        console.log(this.getChartConfigs(newEvents));
+        this.createChart(newEvents)
+      }
+
+    }
+  },
+  computed:{
+    userEvents(){
+      return dataStore().getUserEvents
+    }
+  },
+  methods: {
+    init() {
+      this.getEvents().then((events) => {
+        this.createChart(events);
+      });
+    },
+    calculateChart(events) {
+      const workEvents = events.filter((e) => e.eventType == "WORK");
+      const lifeEvents = events.filter((e) => e.eventType == "WORK");
+      return ({
+        labels: ["Red", "Blue"],
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [workEvents.length, lifeEvents.length],
+            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+            hoverOffset: 4,
+          },
+        ],
+      });
+    },
+    getChartConfigs(events) {
+      return ({
+        type: "doughnut",
+        data: this.calculateChart(events),
+      });
+    },
+    getEvents() {
+      return jwtFetch("http://localhost:8080/events", "GET");
+    },
+    createChart(events) {
+      const ctx = document.getElementById("myChart");
+      new Chart(ctx, this.getChartConfigs(events));
+    },
   },
 };
 </script>
