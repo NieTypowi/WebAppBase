@@ -7,6 +7,8 @@
       <button class="button-default">Login</button>
       <p v-if="message">{{ message }}</p>
     </form>
+    <button class="button-default" @click="goToRegister()">register here</button>
+   
   </div>
 </template>
 
@@ -29,9 +31,16 @@ export default {
     login() {
       if (this.username && this.password) {
         console.log({ username: this.username, password: this.password });
-        authStore().login({ username: this.username, password: this.password });
+        authStore().login({ username: this.username, password: this.password })
+        .then(() => this.$router.replace("/"));
       }
     },
+    test(){
+      jwtFetch("http://localhost:8080/events",'GET',{},{}).then(r => console.log(r))
+    },
+    goToRegister(){
+      this.$router.replace("/register")
+    }
   },
 };
 </script>

@@ -67,5 +67,14 @@ export default {
       }
     },
   },
+  mounted(){
+      const token = window.localStorage.getItem('token');
+      
+      if(token == '' || token == undefined){
+        this.$router.replace("/login")
+      }
+      
+  
+  }
 };
 </script>

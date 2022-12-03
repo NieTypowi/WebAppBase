@@ -29,6 +29,7 @@ export default {
       if (this.username && this.password) {
         console.log({ username: this.username, password: this.password, confirmedPassword: this.password });
         authStore().register({ username: this.username, password: this.password, confirmedPassword: this.password });
+        this.$router.replace("/login")
       }
     },
   },

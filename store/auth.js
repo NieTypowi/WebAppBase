@@ -10,6 +10,7 @@ export const authStore = defineStore({
     }
   },
 
+  
   getters: {
     getRegisterRes(state) {
       return state.registerRes
@@ -37,7 +38,6 @@ export const authStore = defineStore({
       this.user = data;
     },
 
-
     register( data ) {
         $fetch( 'http://localhost:8080/authentication/register', {
             method: 'POST',
@@ -52,7 +52,7 @@ export const authStore = defineStore({
     },
 
     login( data ) {
-      $fetch( 'http://localhost:8080/authentication/login', {
+      return $fetch( 'http://localhost:8080/authentication/login', {
           method: 'POST',
           body: data
       })
@@ -61,12 +61,19 @@ export const authStore = defineStore({
             username: data.username,
             token: res.token,
           })
+          localStorage.setItem('token',res.token);
+    
       })
       .catch(err => {
         // this.setLoginRes(res.failReason)
         console.log(err);
         
       })
+      
     },
+    logout(){
+      console.log("logout")
+      localStorage.setItem('token','');
+    }     
   }
 })

@@ -5,7 +5,10 @@
     <!-- Footer -->
   </div>
 </template>
-
+<script>
+export default {
+}
+</script>
 <style>
 .bg-mesh {
   background-color: hsla(240, 100%, 89%, 1);
