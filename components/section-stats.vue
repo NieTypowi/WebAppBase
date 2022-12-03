@@ -44,10 +44,10 @@ export default {
       const workEvents = events.filter((e) => e.eventType == "WORK");
       const lifeEvents = events.filter((e) => e.eventType == "LIFE");
       return {
-        labels: ["Red", "Blue"],
+        labels: ["Work", "Life"],
         datasets: [
           {
-            label: "My First Dataset",
+            label: "number of events",
             data: [workEvents.length, lifeEvents.length],
             backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
             hoverOffset: 4,
