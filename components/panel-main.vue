@@ -2,12 +2,17 @@
   <div class="p-5 pl-0 pointer-events-none">
     <div class="h-full flex pointer-events-none transition duration-300">
       <div
-        class="relative z-10 w-14 backdrop-blur-md border border-l-0 border-blue-main pointer-events-auto transition-all duration-300"
-        :class="[collapsed ? 'border-l-0 rounded-r-2xl bg-purple-main/20' : 'bg-white/80 ']"
+        class="relative z-10 w-14 backdrop-blur-md pointer-events-auto transition-all duration-300"
+        :class="[
+          collapsed ? 'rounded-r-2xl bg-purple-main/20' : 'bg-white/80 ',
+        ]"
       >
         <div class="icons-list">
           <ul>
-            <li @click="openSection(1)" :class="{ active: !collapsed && currSectionId == 1 }">
+            <li
+              @click="openSection(1)"
+              :class="{ active: !collapsed && currSectionId == 1 }"
+            >
               <svg
                 class=""
                 width="30px"
@@ -27,15 +32,30 @@
                   class="clr-i-outline clr-i-outline-path-2"
                   d="M32.25,6H29V8h3V30H4V8H7V6H3.75A1.78,1.78,0,0,0,2,7.81V30.19A1.78,1.78,0,0,0,3.75,32h28.5A1.78,1.78,0,0,0,34,30.19V7.81A1.78,1.78,0,0,0,32.25,6Z"
                 ></path>
-                <path class="clr-i-outline clr-i-outline-path-3" d="M10,10a1,1,0,0,0,1-1V3A1,1,0,0,0,9,3V9A1,1,0,0,0,10,10Z"></path>
-                <path class="clr-i-outline clr-i-outline-path-4" d="M26,10a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V9A1,1,0,0,0,26,10Z"></path>
-                <rect class="clr-i-outline clr-i-outline-path-5" x="13" y="6" width="10" height="2"></rect>
+                <path
+                  class="clr-i-outline clr-i-outline-path-3"
+                  d="M10,10a1,1,0,0,0,1-1V3A1,1,0,0,0,9,3V9A1,1,0,0,0,10,10Z"
+                ></path>
+                <path
+                  class="clr-i-outline clr-i-outline-path-4"
+                  d="M26,10a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V9A1,1,0,0,0,26,10Z"
+                ></path>
+                <rect
+                  class="clr-i-outline clr-i-outline-path-5"
+                  x="13"
+                  y="6"
+                  width="10"
+                  height="2"
+                ></rect>
                 <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
               </svg>
             </li>
           </ul>
           <ul>
-            <li @click="openSection(2)" :class="{ active: !collapsed && currSectionId == 2 }">
+            <li
+              @click="openSection(2)"
+              :class="{ active: !collapsed && currSectionId == 2 }"
+            >
               <svg
                 width="30px"
                 height="30px"
@@ -100,7 +120,10 @@
                 <g></g>
               </svg>
             </li>
-            <li @click="openSection(3)" :class="{ active: !collapsed && currSectionId == 3 }">
+            <li
+              @click="openSection(3)"
+              :class="{ active: !collapsed && currSectionId == 3 }"
+            >
               <svg
                 width="30px"
                 height="30px"
@@ -173,10 +196,20 @@
         </div>
       </div>
       <div
-        class="relative p-5 backdrop-blur-md bg-white/80 border transition duration-300 rounded-r-2xl pointer-events-auto"
-        :class="[collapsed ? '-translate-x-full border-transparent' : 'translate-x-[-56px] border-blue-main']"
+        class="relative p-5 backdrop-blur-md bg-white/80 transition duration-300 rounded-r-2xl pointer-events-auto"
+        :class="[collapsed ? '-translate-x-full ' : 'translate-x-[-56px] ']"
       >
-        <div class="absolute top-0 right-0" @click="toggleCollapse()">bck</div>
+        <div class="absolute top-0 right-0" @click="toggleCollapse()">
+          <div class="back-button w-5 h-5 mr-3 mt-3 scale-75">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+              <path
+                style="fill: #010002"
+                stroke="none"
+                d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+              />
+            </svg>
+          </div>
+        </div>
         <!-- <slot /> -->
         <!-- <div v-for="item in items">
             <slot name="item" v-bind="item"></slot>

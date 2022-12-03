@@ -1,10 +1,10 @@
 <template>
-  <div class="w-full flex justify-between gap-5 p-3 bg-purple-main/20 backdrop-blur-md">
+  <div class="w-full flex justify-start p-3 bg-purple-main/20 backdrop-blur-md">
     <logo />
-    <div>filtry</div>
-    <div>
-      <!-- clearfix -->
+    <div class="w-full flex justify-center items-center">
+      <modes />
     </div>
+    <div class="hidden w-[139px] h-[32px] md:block"></div>
   </div>
 </template>
 

@@ -2,17 +2,25 @@
   <div class="py-5 pointer-events-none">
     <div class="h-full flex pointer-events-none">
       <div
-        class="relative p-5 backdrop-blur-md bg-white/80 rounded-l-2xl border border-r-0 border-blue-main overflow-hidden transition duration-300 pointer-events-auto"
+        class="relative p-5 backdrop-blur-md bg-white/80 rounded-l-2xl overflow-hidden transition duration-300 pointer-events-auto"
         :class="[collapsed ? 'translate-x-[calc(100%_-_56px)]' : '']"
       >
         <div
-          class="absolute top-0 left-0 z-10 w-14 backdrop-blur-md h-full border-0 border-r border-blue-main transition-all duration-300"
+          class="absolute top-0 left-0 z-10 w-14 backdrop-blur-md h-full transition-all duration-300"
           :class="[collapsed ? ' bg-purple-main/20' : 'bg-white/80 ']"
         >
           <div class="icons-list">
             <ul>
-              <li @click="openSection(1)" :class="{ active: !collapsed && currSectionId == 1 }">
-                <svg width="30px" height="30px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+              <li
+                @click="openSection(1)"
+                :class="{ active: !collapsed && currSectionId == 1 }"
+              >
+                <svg
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 50 50"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path d="M18 36h-2V26h-4v10h-2V24h8z" />
                   <path d="M28 36h-2V20h-4v16h-2V18h8z" />
                   <path d="M38 36h-2V14h-4v22h-2V12h8z" />
@@ -21,7 +29,10 @@
               </li>
             </ul>
             <ul>
-              <li @click="openSection(2)" :class="{ active: !collapsed && currSectionId == 2 }">
+              <li
+                @click="openSection(2)"
+                :class="{ active: !collapsed && currSectionId == 2 }"
+              >
                 <svg
                   width="30px"
                   height="30px"
@@ -66,7 +77,17 @@
             </ul>
           </div>
         </div>
-        <div class="absolute top-0 right-0" @click="toggleCollapse()">bck</div>
+        <div class="absolute top-0 right-0" @click="toggleCollapse()">
+          <div class="back-button w-5 h-5 mr-3 mt-5 rotate-180 scale-75">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+              <path
+                style="fill: #010002"
+                stroke="none"
+                d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"
+              />
+            </svg>
+          </div>
+        </div>
         <TransitionGroup> </TransitionGroup>
         <div class="w-[300px] xl:w-[800px]"></div>
       </div>
