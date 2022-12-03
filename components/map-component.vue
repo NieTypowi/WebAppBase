@@ -5,16 +5,60 @@
 <script>
 import { dataStore } from "~/store/data";
 export default {
-
   data() {
     return {
       baseCoords: { lat: 0, lng: 0 },
-      markerList: [],
       markerTempPos: {},
       markerTemp: null,
     };
   },
+
+  computed: {
+    userEvents() {
+      return dataStore().$state.userEvents;
+    },
+    userEventsMarkers() {
+      if (this.userEvents) {
+        const markers = [];
+        this.userEvents.forEach((item) => {
+          let marker = L.marker([item.latitude, item.longitude]);
+          if (item.eventType == "WORK" && dataStore().$state.workFilter) {
+            markers.push(marker);
+          }
+          if (item.eventType == "LIFE" && dataStore().$state.lifeFilter) {
+            markers.push(marker);
+          }
+        });
+        return markers;
+      }
+    },
+  },
+
+  watch: {
+    userEventsMarkers(newMarkers, old) {
+      if (old?.length > 0) {
+        this.removeMarkers(old);
+      }
+      if (newMarkers?.length > 0) {
+        this.addMarkers();
+      }
+    },
+  },
+
   methods: {
+    removeMarkers(markers) {
+      markers.forEach((marker) => {
+        console.log(marker.remove());
+        marker.remove();
+      });
+    },
+    addMarkers() {
+      if (this.userEventsMarkers) {
+        this.userEventsMarkers.forEach((marker) => {
+          marker.addTo(this.map);
+        });
+      }
+    },
     getPosition() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
@@ -72,6 +116,7 @@ export default {
     }).addTo(map);
 
     this.markPointListener();
+    this.addMarkers();
   },
 };
 </script>

@@ -92,7 +92,10 @@
           />
         </div>
         <button @click="submit()" class="button-default">save</button>
-        <p>Position set on map: lat:{{ lat }} lang:{{ lng }}</p>
+        <p v-if="lat && lng" class="text-lg">
+          Position set on map: lat:{{ lat }} lang:{{ lng }}
+        </p>
+        <p v-else class="text-xl text-center">*Point a place on map!</p>
       </div>
     </form>
   </div>
