@@ -1,28 +1,31 @@
 <template>
-    <div class="flex flex-col justify-center items-center min-h-screen">
-        <h1 v-if="userData" class="text-4xl mb-5">{{userData}}</h1>
-        <h1 v-else class="text-4xl mb-5"> Hello nuxt 3 base </h1>
-        <div class="flex gap-5">
-            <nuxt-link :to="'/login'" class="button-default" >Login</nuxt-link>
-            <nuxt-link :to="'/register'" class="button-default" >Register</nuxt-link>
-        </div>
+  <div class="relative h-full">
+    <div class="relative z-10 h-full flex flex-col pointer-events-none">
+      <top-bar class="pointer-events-auto" />
+      <div class="flex-grow flex justify-between max-w-full overflow-hidden pointer-events-none">
+        <sidepanel />
+        <sidepanel :on-right="true" />
+      </div>
     </div>
+    <div class="absolute z-0 inset-0">
+      <!-- map here  -->
+    </div>
+  </div>
 </template>
 
 <script>
-import { authStore } from '~/store/auth'
+import { authStore } from "~/store/auth";
 
 export default {
-    setup(){
-        definePageMeta({
-            title: 'My home page'
-        })
+  setup() {
+    definePageMeta({
+      title: "My home page",
+    });
+  },
+  computed: {
+    userData() {
+      return authStore().getUser;
     },
-    computed:{
-        userData(){
-            return authStore().getUser
-        }
-    }
-
-}
+  },
+};
 </script>
