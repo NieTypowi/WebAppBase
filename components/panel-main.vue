@@ -181,7 +181,7 @@
         <!-- <div v-for="item in items">
             <slot name="item" v-bind="item"></slot>
           </div> -->
-        <div class="w-[400px]"></div>
+        <div class="w-[200px] md:w-[300px]"></div>
       </div>
     </div>
   </div>
