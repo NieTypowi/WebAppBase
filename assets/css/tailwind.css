@@ -29,8 +29,11 @@
 }
 
 @layer components {
+  .input-field {
+    @apply w-full mb-5 text-2xl px-4 py-2 rounded-2xl bg-white/60 border border-purple-main/80 focus:border-purple-main focus:bg-white hover:bg-white/70 transition outline-none focus:outline-none;
+  }
   .button-default {
-    @apply text-2xl px-4 py-2 rounded-xl bg-teal-50 border border-teal-400 hover:bg-gray-200 transition;
+    @apply text-xl px-5 pt-1 pb-2 rounded-full bg-blue-light/50 border border-blue-light hover:bg-blue-light/60 transition;
   }
 
   .icons-list {

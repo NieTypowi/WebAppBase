@@ -5,7 +5,7 @@
       <div class="flex-grow max-w-full overflow-hidden pointer-events-none">
         <div
           ref="panels"
-          class="relative h-full bg-white md:bg-transparent rounded-t-3xl md:rounded-none pt-[60px] md:pt-0 flex flex-col md:flex-row justify-between w-full overflow-hidden pointer-events-auto md:pointer-events-none md:!translate-y-0 transition-all duration-100"
+          class="relative h-full bg-white md:bg-transparent rounded-t-3xl md:rounded-none pt-[60px] md:pt-0 flex flex-col md:flex-row justify-between w-full overflow-auto md:overflow-hidden pointer-events-auto md:pointer-events-none md:!translate-y-0 transition-all duration-100"
           @touchmove="panelTouchMove($event)"
           @touchend="panelTouchEnd()"
           style="transform: translateY(calc(100% - 40px))"

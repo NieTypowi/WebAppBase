@@ -1,15 +1,22 @@
 <template>
   <div class="bg-mesh min-h-screen h-full">
-    <!-- Navbar -->
     <slot />
-    <!-- Footer -->
   </div>
 </template>
 <script>
-export default {
-}
+export default {};
 </script>
 <style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
 .bg-mesh {
   background-color: hsla(240, 100%, 89%, 1);
   background-image: radial-gradient(at 86% 33%, hsla(310, 71%, 63%, 1) 0px, transparent 50%),

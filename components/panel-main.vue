@@ -124,7 +124,7 @@
             </svg>
           </div>
         </div>
-        <div class="w-full md:w-[400px] lg:w-[500px] xl:w-[600px]">
+        <div class="relative w-full md:w-[400px] lg:w-[500px] xl:w-[600px]">
           <TransitionGroup name="sectionFade" key="[1,2]">
             <div v-show="currSectionId == 1 || isMobile" class="w-full h-full" :key="1">
               <section-events />
@@ -178,14 +178,15 @@ export default {
 .sectionFade-enter-active,
 .sectionFade-leave-active {
   position: absolute;
-  width: inherit;
+  inset: 0;
+  width: 100%;
   transition: all 0.4s ease;
 }
 
 .sectionFade-enter-from {
-  transform: scale(1.05);
   opacity: 0;
-  filter: blur(5px);
+  transform: scale(1.05);
+  filter: blur(2px);
 }
 .sectionFade-leave-to {
   transform: scale(0.95);

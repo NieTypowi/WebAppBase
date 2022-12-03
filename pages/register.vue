@@ -1,12 +1,23 @@
 <template>
   <div class="flex flex-col justify-center items-center min-h-screen">
-    <h1 class="text-4xl mb-5">Register</h1>
+    <h1 class="text-4xl mb-5 text-white">Register</h1>
     <form method="post" @submit.prevent="register" class="w-full max-w-md">
       <input v-model="username" type="text" name="username" id="username" placeholder="User name" class="input-field" />
-      <input v-model="password" type="text" name="password" id="password" placeholder="Password" class="input-field" />
-      <button class="button-default">Register</button>
+      <input v-model="password" type="password" name="password" id="password" placeholder="Password" class="input-field !mb-2" />
+      <input
+        v-model="confirmedPassword"
+        type="password"
+        name="confirmedPassword"
+        id="confirmedPassword"
+        placeholder="Confirm password"
+        class="input-field"
+      />
+      <button class="ml-auto block button-default text-white mb-5">Register</button>
     </form>
-    <p v-if="result">{{ result }}</p>
+    <p class="text-sm text-white">
+      Already have an account?
+      <nuxt-link class="font-semibold underline text-white" :to="'/login'">Sign in!</nuxt-link>
+    </p>
   </div>
 </template>
 
@@ -17,27 +28,24 @@ export default {
     return {
       username: "",
       password: "",
+      confirmedPassword: "",
     };
   },
   computed: {
-    result() {
+    message() {
       return authStore().getRegisterRes;
     },
   },
   methods: {
     register() {
       if (this.username && this.password) {
-        console.log({ username: this.username, password: this.password, confirmedPassword: this.password });
-        authStore().register({ username: this.username, password: this.password, confirmedPassword: this.password });
-        this.$router.replace("/login")
+        console.log({ username: this.username, password: this.password, confirmedPassword: this.confirmedPassword });
+        authStore().register({ username: this.username, password: this.password, confirmedPassword: this.confirmedPassword });
+        this.$router.replace("/login");
       }
     },
   },
 };
 </script>
 
-<style scoped>
-.input-field {
-  @apply w-full mb-5 text-2xl px-4 py-2 rounded-xl bg-white border border-teal-400 focus:border-teal-600 transition outline-none focus:outline-none;
-}
-</style>
+<style scoped></style>

@@ -16,52 +16,22 @@
       >
         <circle cx="20" cy="20" r="19.5" class="stroke-current" />
         <rect x="13" y="19" width="14" height="2" class="fill-current" />
-        <rect
-          x="21"
-          y="13"
-          width="14"
-          height="2"
-          transform="rotate(90 21 13)"
-          class="fill-current"
-        />
+        <rect x="21" y="13" width="14" height="2" transform="rotate(90 21 13)" class="fill-current" />
       </svg>
     </div>
-    <form
-      v-if="collapsed"
-      ref="eventForm"
-      method="post"
-      @submit.prevent="addEvent"
-      class="flex flex-col w-full"
-    >
+    <form v-if="collapsed" ref="eventForm" method="post" @submit.prevent="addEvent" class="flex flex-col w-full">
       <div class="formText">
-        <input
-          class="textInput"
-          type="text"
-          id="title"
-          name="title"
-          placeholder=" "
-        />
+        <input class="textInput" type="text" id="title" name="title" placeholder=" " />
         <span> Title </span>
       </div>
       <div class="formText">
-        <textarea
-          class="min-h-[60px] max-h-[500px] textInput"
-          name="description"
-          id="description"
-          placeholder=" "
-        ></textarea>
+        <textarea class="min-h-[60px] max-h-[500px] textInput" name="description" id="description" placeholder=" "></textarea>
         <span> Description </span>
       </div>
       <div class="pt-5">
         <span class="block">Select event type:</span>
         <div class="inline-block mr-5">
-          <input
-            type="radio"
-            id="typeChoice1"
-            name="type"
-            value="work"
-            class="peer appearance-none"
-          />
+          <input type="radio" id="typeChoice1" name="type" value="work" class="peer appearance-none hidden" />
           <label
             for="typeChoice1"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-pink-main/40 border border-pink-main opacity-100 rounded-full transition duration-200 peer-checked:text-white"
@@ -69,13 +39,7 @@
           >
         </div>
         <div class="inline-block mr-5">
-          <input
-            type="radio"
-            id="typeChoice2"
-            name="type"
-            value="life"
-            class="peer appearance-none"
-          />
+          <input type="radio" id="typeChoice2" name="type" value="life" class="peer appearance-none hidden" />
           <label
             for="typeChoice2"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-blue-light/40 border border-blue-light rounded-full transition duration-200 peer-checked:text-white"
@@ -84,17 +48,15 @@
         </div>
         <div class="formText">
           <input
-            class="block mt-5 border border-solid border-gray-300 rounded-[5px] px-5 py-[15px] text-base md:text-lg transition duration-200 focus-visible:border-purple-main focus-visible:outline-none"
+            class="block mt-2 mb-5 border border-solid border-gray-300 rounded-[5px] px-5 py-[15px] text-base md:text-lg transition duration-200 focus-visible:border-purple-main focus-visible:outline-none"
             type="datetime-local"
             id="meeting-time"
             name="meeting-time"
             min="2018-06-07T00:00"
           />
         </div>
-        <button @click="submit()" class="button-default">save</button>
-        <p v-if="lat && lng" class="text-lg">
-          Position set on map: lat:{{ lat }} lang:{{ lng }}
-        </p>
+        <button @click="submit()" class="button-default ml-auto block">Save</button>
+        <p v-if="lat && lng" class="text-lg">Position set on map: lat:{{ lat }} lang:{{ lng }}</p>
         <p v-else class="text-xl text-center">*Point a place on map!</p>
       </div>
     </form>
@@ -135,13 +97,11 @@ export default {
         longitude: this.lng,
         latitude: this.lat,
       };
-      jwtFetch("http://localhost:8080/users/events", "POST", request).then(
-        () => {
-          jwtFetch("http://localhost:8080/events", "GET").then((res) => {
-            dataStore().setUserEvents(res);
-          });
-        }
-      );
+      jwtFetch("http://localhost:8080/users/events", "POST", request).then(() => {
+        jwtFetch("http://localhost:8080/events", "GET").then((res) => {
+          dataStore().setUserEvents(res);
+        });
+      });
     },
     toggleForm() {
       this.collapsed = !this.collapsed;
