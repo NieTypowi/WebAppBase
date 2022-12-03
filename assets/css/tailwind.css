@@ -2,10 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
+@layer base {
+  html,
+  body,
+  #__nuxt {
+    height: 100%;
+  }
 
-    .button-default{
-        @apply text-2xl px-4 py-2 rounded-xl bg-teal-50 border border-teal-400 hover:bg-gray-200 transition
-    }
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+}
 
+@layer components {
+  .button-default {
+    @apply text-2xl px-4 py-2 rounded-xl bg-teal-50 border border-teal-400 hover:bg-gray-200 transition;
+  }
+
+  .icons-list {
+    @apply h-full flex flex-col justify-between py-5;
+  }
+  .icons-list ul {
+    @apply flex flex-col items-center gap-5;
+  }
+
+  .icons-list ul li svg path {
+    @apply transition duration-200;
+  }
+  .icons-list ul li svg,
+  .icons-list ul li svg path {
+    @apply !fill-black;
+  }
+
+  .icons-list ul li:hover svg,
+  .icons-list ul li:hover svg path {
+    @apply !fill-purple-main;
+  }
+
+  .icons-list ul li.active svg,
+  .icons-list ul li.active svg path {
+    @apply !fill-purple-main;
+  }
 }
