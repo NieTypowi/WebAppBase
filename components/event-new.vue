@@ -1,18 +1,66 @@
 <template>
   <div class="w-full">
-    <form method="post" @submit.prevent="addEvent" class="flex flex-col w-full">
+    <div class="flex">
+      <span class="block pt-5">Add new event</span>
+      <svg
+        @click="toggleForm()"
+        @mouseover="isHovered = true"
+        @mouseleave="isHovered = false"
+        :class="[isHovered ? 'text-[#884AC6]' : 'text-[#002738]']"
+        class="mt-4 ml-3 w-6 h-8 transition duration-300"
+        width="40"
+        height="40"
+        viewBox="0 0 40 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="20" cy="20" r="19.5" class="stroke-current" />
+        <rect x="13" y="19" width="14" height="2" class="fill-current" />
+        <rect
+          x="21"
+          y="13"
+          width="14"
+          height="2"
+          transform="rotate(90 21 13)"
+          class="fill-current"
+        />
+      </svg>
+    </div>
+    <form
+      v-if="collapsed"
+      method="post"
+      @submit.prevent="addEvent"
+      class="flex flex-col w-full"
+    >
       <div class="formText">
-        <input class="textInput" type="text" id="title" name="title" placeholder=" " />
+        <input
+          class="textInput"
+          type="text"
+          id="title"
+          name="title"
+          placeholder=" "
+        />
         <span> Title </span>
       </div>
       <div class="formText">
-        <textarea class="min-h-[60px] max-h-[500px] textInput" name="description" id="description" placeholder=" "></textarea>
+        <textarea
+          class="min-h-[60px] max-h-[500px] textInput"
+          name="description"
+          id="description"
+          placeholder=" "
+        ></textarea>
         <span> Description </span>
       </div>
-      <div>
+      <div class="pt-5">
         <span class="block">Select event type:</span>
         <div class="inline-block mr-5">
-          <input type="radio" id="typeChoice1" name="type" value="work" class="peer appearance-none" />
+          <input
+            type="radio"
+            id="typeChoice1"
+            name="type"
+            value="work"
+            class="peer appearance-none"
+          />
           <label
             for="typeChoice1"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-pink-main/40 border border-pink-main opacity-100 rounded-full transition duration-200 peer-checked:text-white"
@@ -20,12 +68,35 @@
           >
         </div>
         <div class="inline-block mr-5">
-          <input type="radio" id="typeChoice2" name="type" value="life" class="peer appearance-none" />
+          <input
+            type="radio"
+            id="typeChoice2"
+            name="type"
+            value="life"
+            class="peer appearance-none"
+          />
           <label
             for="typeChoice2"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-blue-light/40 border border-blue-light rounded-full transition duration-200 peer-checked:text-white"
             >Life</label
           >
+        </div>
+        <div class="formText">
+          <input
+            class="block mt-5 border border-solid border-gray-300 rounded-[5px] px-5 py-[15px] text-base md:text-lg transition duration-200 focus-visible:border-purple-main focus-visible:outline-none"
+            type="datetime-local"
+            id="meeting-time"
+            name="meeting-time"
+            min="2018-06-07T00:00"
+          />
+        </div>
+        <div class="formText">
+          <input
+            type="number"
+            name="l1"
+            id="l1"
+            class="w-1/2 mt-5 border border-solid border-gray-300 rounded-[5px] px-5 py-[15px] text-base md:text-lg transition duration-200 focus-visible:border-purple-main focus-visible:outline-none"
+          />
         </div>
       </div>
     </form>
@@ -34,8 +105,17 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isHovered: false,
+      collapsed: false,
+    };
+  },
   methods: {
     addEvent() {},
+    toggleForm() {
+      this.collapsed = !this.collapsed;
+    },
   },
 };
 </script>
