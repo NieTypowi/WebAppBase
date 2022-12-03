@@ -15,7 +15,6 @@
             :class="{ 'opacity-50': mobilePanelPos == 100 || mobilePanelPos == 0 }"
           ></span>
           <panel-main />
-          <panel-stats />
         </div>
       </div>
     </div>

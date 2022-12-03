@@ -34,6 +34,14 @@
               </svg>
             </li>
             <li @click="openSection(2)" :class="{ active: !collapsed && currSectionId == 2 }">
+              <svg width="30px" height="30px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 36h-2V26h-4v10h-2V24h8z" />
+                <path d="M28 36h-2V20h-4v16h-2V18h8z" />
+                <path d="M38 36h-2V14h-4v22h-2V12h8z" />
+                <path d="M8 36h32v2H8z" />
+              </svg>
+            </li>
+            <li @click="openSection(3)" :class="{ active: !collapsed && currSectionId == 3 }">
               <svg
                 width="30px"
                 height="30px"
@@ -116,12 +124,15 @@
             </svg>
           </div>
         </div>
-        <div class="w-full md:w-[200px] lg:w-[300px]">
+        <div class="w-full md:w-[400px] lg:w-[500px] xl:w-[600px]">
           <TransitionGroup name="sectionFade" key="[1,2]">
-            <div v-show="currSectionId == 1 || isMobile" class="w-full" :key="1">
+            <div v-show="currSectionId == 1 || isMobile" class="w-full h-full" :key="1">
               <section-events />
             </div>
-            <div v-show="currSectionId == 2 || isMobile" class="w-full" :key="2">
+            <div v-show="currSectionId == 2 || isMobile" class="w-full h-full" :key="2">
+              <section-stats />
+            </div>
+            <div v-show="currSectionId == 3 || isMobile" class="w-full h-full" :key="3">
               <section-user />
             </div>
           </TransitionGroup>
@@ -168,15 +179,17 @@ export default {
 .sectionFade-leave-active {
   position: absolute;
   width: inherit;
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
 }
 
 .sectionFade-enter-from {
+  transform: scale(1.05);
   opacity: 0;
-  transform: translateX(-100%);
+  filter: blur(5px);
 }
 .sectionFade-leave-to {
-  transform: translateX(100%);
+  transform: scale(0.95);
   opacity: 0;
+  filter: blur(5px);
 }
 </style>

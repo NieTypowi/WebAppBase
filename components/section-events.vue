@@ -1,6 +1,7 @@
 <template>
   <div class="w-full md:border-0">
     <h2>My Events</h2>
+    <event-new></event-new>
     <ul v-if="events">
       <li></li>
     </ul>
@@ -9,7 +10,9 @@
 </template>
 
 <script>
+import eventNew from "./event-new.vue";
 export default {
+  components: { eventNew },
   data() {
     return {
       events: null,
