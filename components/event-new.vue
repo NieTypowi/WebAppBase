@@ -28,6 +28,7 @@
     </div>
     <form
       v-if="collapsed"
+      ref="eventForm"
       method="post"
       @submit.prevent="addEvent"
       class="flex flex-col w-full"
@@ -90,6 +91,7 @@
             min="2018-06-07T00:00"
           />
         </div>
+        <button @click="submit()" class="button-default">save</button>
         <p>Position set on map: lat:{{lat}}  lang:{{lng}}</p>
       </div>
     </form>
@@ -115,7 +117,23 @@ export default {
     },
   },
   methods: {
-    addEvent() {},
+    submit() {
+      const formData = new FormData(this.$refs['eventForm']);
+      let object = {};
+      formData.forEach((value, key) => object[key] = value);
+      const stringify = JSON.stringify(object);
+      const json = JSON.parse(stringify);
+      
+      const request = {
+          eventType : json['type'],
+          eventTitle: json['title'],
+          eventDescription: json['description'],
+          eventTime: json['meeting-time'],
+          longitude: this.lng,
+          latitude: this.lat
+      }
+      jwtFetch("http://localhost:8080/users/events",'POST',request);
+    },
     toggleForm() {
       this.collapsed = !this.collapsed;
     },
