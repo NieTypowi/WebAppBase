@@ -14,7 +14,7 @@ export const dataStore = defineStore({
       return state.tempPos;
     },
     getUserEvents(state) {
-      return state.UserEvents;
+      return state.userEvents;
     },
   },
 
