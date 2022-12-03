@@ -1,20 +1,19 @@
 <template>
-  <div id="map" class="absolute inset-0 z-0" @click="markPoint"></div>
-  <div class="absolute bottom-12 right-24" @click="getLocation">
-    Get location
-  </div>
+  <div id="map" class="absolute inset-0 z-0"></div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      baseCoords: [0, 0],
+      baseCoords: { lat: 0, lng: 0 },
       markerList: [],
+      markerTempPos: {},
+      markerTemp: null,
     };
   },
   methods: {
-    getLocation() {
+    getPosition() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(this.showPosition);
       }
@@ -23,13 +22,22 @@ export default {
     showPosition(position) {
       console.log(`Latitude: ${position.coords.latitude}  
       Longitude ${position.coords.longitude}`);
-      this.baseCoords = [position.coords.latitude, position.coords.longitude];
-      // this.map.flyTo([this.baseCoords[0], this.baseCoords[1]]);
+      this.baseCoords = { lat: position.coords.latitude, lng: position.coords.longitude };
+      this.map.flyTo([this.baseCoords.lat, this.baseCoords.lng]);
     },
-    markPoint($e) {
-      this.markerList.push($e.latlng);
-      console.log($e.latlng);
-      console.log(this.markerList);
+
+    markPointListener() {
+      const map = this.map;
+      map.on("click", function (e) {
+        if (this.markerTemp) {
+          this.markerTemp.remove();
+        }
+        let coord = e.latlng;
+        let lat = coord.lat;
+        let lng = coord.lng;
+        this.markerTempPos = { lat: lat, lng: lng };
+        this.markerTemp = L.marker([this.markerTempPos.lat, this.markerTempPos.lng]).addTo(map);
+      });
     },
   },
 
@@ -42,6 +50,7 @@ export default {
       maxZoom: 64,
     });
     this.map = map;
+    map.setView([0, 0], 9);
     map.options.minZoom = 2;
     map.setMaxBounds([
       [-90, -Infinity],
@@ -52,20 +61,14 @@ export default {
         position: "bottomright",
       })
       .addTo(map);
-    // Testowe markery
-    let marker = L.marker([this.baseCoords[0], this.baseCoords[1]]).addTo(map);
-    this.markerList.push(marker.getLatLng());
-    marker = L.marker([40, 20]).addTo(map);
-    this.markerList.push(marker.getLatLng());
-    marker = L.marker([50, 30]).addTo(map);
-    this.markerList.push(marker.getLatLng());
-    const Tiles = L.tileLayer(
-      "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=qhbQi9a0jvf68y31tWwv",
-      {
-        attribution:
-          '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-      }
-    ).addTo(map);
+
+    this.getPosition();
+    const Tiles = L.tileLayer("https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=qhbQi9a0jvf68y31tWwv", {
+      attribution:
+        '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+    }).addTo(map);
+
+    this.markPointListener();
   },
 };
 </script>
