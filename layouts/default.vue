@@ -5,7 +5,19 @@
     <!-- Footer -->
   </div>
 </template>
-
+<script>
+export default {
+  mounted(){
+      const token = window.localStorage.getItem('token');
+      
+      if(token == ''){
+        this.$router.replace("/login")
+      }
+      
+  
+  }
+}
+</script>
 <style>
 .bg-mesh {
   background-color: hsla(240, 100%, 89%, 1);
