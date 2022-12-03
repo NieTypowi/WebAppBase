@@ -7,9 +7,7 @@
         <panel-stats />
       </div>
     </div>
-    <div class="absolute z-0 inset-0">
-      <!-- map here  -->
-    </div>
+    <map-component />
   </div>
 </template>
 

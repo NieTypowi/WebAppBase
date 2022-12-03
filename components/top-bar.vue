@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex justify-between gap-5 p-5 bg-purple-main/20 backdrop-blur-md">
+  <div class="w-full flex justify-between gap-5 p-3 bg-purple-main/20 backdrop-blur-md">
     <logo />
     <div>filtry</div>
     <div>

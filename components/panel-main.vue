@@ -1,8 +1,8 @@
 <template>
   <div class="p-5 pl-0 pointer-events-none">
-    <div class="h-full flex pointer-events-auto transition duration-300">
+    <div class="h-full flex pointer-events-none transition duration-300">
       <div
-        class="relative z-10 w-14 backdrop-xl border border-l-0 border-blue-main transition-all duration-300"
+        class="relative z-10 w-14 backdrop-blur-md border border-l-0 border-blue-main pointer-events-auto transition-all duration-300"
         :class="[collapsed ? 'border-l-0 rounded-r-2xl bg-purple-main/20' : 'bg-white/80 ']"
       >
         <div class="icons-list">
@@ -173,15 +173,15 @@
         </div>
       </div>
       <div
-        class="relative p-5 backdrop-xl bg-white/80 border border-blue-main transition duration-300 rounded-r-2xl"
-        :class="[collapsed ? '-translate-x-full' : 'translate-x-[-56px]']"
+        class="relative p-5 backdrop-blur-md bg-white/80 border transition duration-300 rounded-r-2xl pointer-events-auto"
+        :class="[collapsed ? '-translate-x-full border-transparent' : 'translate-x-[-56px] border-blue-main']"
       >
         <div class="absolute top-0 right-0" @click="toggleCollapse()">bck</div>
         <!-- <slot /> -->
         <!-- <div v-for="item in items">
             <slot name="item" v-bind="item"></slot>
           </div> -->
-        <div class="w-[300px]"></div>
+        <div class="w-[400px]"></div>
       </div>
     </div>
   </div>

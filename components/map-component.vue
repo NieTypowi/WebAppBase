@@ -1,8 +1,6 @@
 <template>
-  <div id="map" class="absolute top-0 bottom-0 left-0 right-0 z-0"></div>
-  <div class="absolute bottom-12 right-24" @click="getLocation">
-    Get location
-  </div>
+  <div id="map" class="absolute inset-0 z-0"></div>
+  <div class="absolute bottom-12 right-24" @click="getLocation">Get location</div>
 </template>
 
 <script>
@@ -31,9 +29,7 @@ export default {
     L.DomEvent.fakeStop = function () {
       return true;
     };
-    const map = L.map("map", { zoomControl: false, tap: false })
-      .setView([0, 0], 2)
-      .locate({ setView: true, maxZoom: 64 });
+    const map = L.map("map", { zoomControl: false, tap: false }).setView([0, 0], 2).locate({ setView: true, maxZoom: 64 });
     this.map = map;
     map.options.minZoom = 2;
     map.setMaxBounds([
@@ -45,13 +41,10 @@ export default {
         position: "bottomright",
       })
       .addTo(map);
-    const Tiles = L.tileLayer(
-      "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=qhbQi9a0jvf68y31tWwv",
-      {
-        attribution:
-          '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-      }
-    ).addTo(map);
+    const Tiles = L.tileLayer("https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=qhbQi9a0jvf68y31tWwv", {
+      attribution:
+        '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+    }).addTo(map);
   },
 };
 </script>
