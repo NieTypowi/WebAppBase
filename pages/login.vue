@@ -7,7 +7,8 @@
       <button class="button-default">Login</button>
       <p v-if="message">{{ message }}</p>
     </form>
-    <button @click="test()">testApi</button>
+    <button class="button-default" @click="goToRegister()">register here</button>
+   
   </div>
 </template>
 
@@ -36,6 +37,9 @@ export default {
     },
     test(){
       jwtFetch("http://localhost:8080/events",'GET',{},{}).then(r => console.log(r))
+    },
+    goToRegister(){
+      this.$router.replace("/register")
     }
   },
 };

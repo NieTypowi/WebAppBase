@@ -7,15 +7,6 @@
 </template>
 <script>
 export default {
-  mounted(){
-      const token = window.localStorage.getItem('token');
-      
-      if(token == ''){
-        this.$router.replace("/login")
-      }
-      
-  
-  }
 }
 </script>
 <style>

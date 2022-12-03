@@ -12,6 +12,7 @@ export default {
   methods: {
     logout(){
       authStore().logout();
+      this.$router.replace("/login")
     }
   }
 };
