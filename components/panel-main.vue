@@ -116,16 +116,12 @@
             </svg>
           </div>
         </div>
-        <!-- <slot /> -->
-        <!-- <div v-for="item in items">
-            <slot name="item" v-bind="item"></slot>
-          </div> -->
         <div class="w-full md:w-[200px] lg:w-[300px]">
-          <TransitionGroup name="sectionFade">
-            <div v-if="currSectionId == 1" class="w-full">
+          <TransitionGroup name="sectionFade" key="[1,2]">
+            <div v-show="currSectionId == 1 || isMobile" class="w-full" :key="1">
               <section-events />
             </div>
-            <div v-if="currSectionId == 2" class="w-full">
+            <div v-show="currSectionId == 2 || isMobile" class="w-full" :key="2">
               <section-user />
             </div>
           </TransitionGroup>
@@ -141,6 +137,7 @@ export default {
     return {
       collapsed: true,
       currSectionId: 1,
+      isMobile: false,
     };
   },
   methods: {
@@ -154,6 +151,14 @@ export default {
       }
       this.currSectionId = id;
     },
+
+    checkDevice() {
+      this.isMobile = window.innerWidth < 768;
+    },
+  },
+  mounted() {
+    this.checkDevice();
+    window.addEventListener("resize", this.checkDevice);
   },
 };
 </script>
