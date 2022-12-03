@@ -6,6 +6,8 @@ export const dataStore = defineStore({
     return {
       userEvents: null,
       tempPos: {},
+      workFilter: true,
+      lifeFilter: true,
     };
   },
 
@@ -25,6 +27,13 @@ export const dataStore = defineStore({
 
     setUserEvents(res) {
       this.userEvents = res;
+    },
+
+    setWorkFilter(res) {
+      this.workFilter = res;
+    },
+    setLifeFilter(res) {
+      this.lifeFilter = res;
     },
   },
 });

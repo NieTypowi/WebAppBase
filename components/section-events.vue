@@ -3,9 +3,11 @@
     <h2>My Events</h2>
     <event-new></event-new>
     <ul v-for="(userEvent, index) in userEvents" :key="index">
-      <li>{{ userEvent }}</li>
+      <li><events-display :data="userEvent"></events-display></li>
     </ul>
-    <p v-if="!userEvents" class="p-5 text-center text-base font-light">You have no incoming events</p>
+    <p v-if="!userEvents" class="p-5 text-center text-base font-light">
+      You have no incoming events
+    </p>
   </div>
 </template>
 
