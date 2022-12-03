@@ -11,7 +11,7 @@
           style="transform: translateY(calc(100% - 40px))"
         >
           <span
-            class="inline-block absolute top-3 left-0 right-0 w-3/4 max-w-[100px] mx-auto h-0.5 rounded-full bg-gray-400"
+            class="inline-block md:hidden absolute top-3 left-0 right-0 w-3/4 max-w-[100px] mx-auto h-0.5 rounded-full bg-gray-400"
             :class="{ 'opacity-50': mobilePanelPos == 100 || mobilePanelPos == 0 }"
           ></span>
           <panel-main />
