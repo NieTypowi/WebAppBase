@@ -16,52 +16,22 @@
       >
         <circle cx="20" cy="20" r="19.5" class="stroke-current" />
         <rect x="13" y="19" width="14" height="2" class="fill-current" />
-        <rect
-          x="21"
-          y="13"
-          width="14"
-          height="2"
-          transform="rotate(90 21 13)"
-          class="fill-current"
-        />
+        <rect x="21" y="13" width="14" height="2" transform="rotate(90 21 13)" class="fill-current" />
       </svg>
     </div>
-    <form
-      v-if="collapsed"
-      ref="eventForm"
-      method="post"
-      @submit.prevent="addEvent"
-      class="flex flex-col w-full"
-    >
+    <form v-if="collapsed" ref="eventForm" method="post" @submit.prevent="addEvent" class="flex flex-col w-full">
       <div class="formText">
-        <input
-          class="textInput"
-          type="text"
-          id="title"
-          name="title"
-          placeholder=" "
-        />
+        <input class="textInput" type="text" id="title" name="title" placeholder=" " />
         <span> Title </span>
       </div>
       <div class="formText">
-        <textarea
-          class="min-h-[60px] max-h-[500px] textInput"
-          name="description"
-          id="description"
-          placeholder=" "
-        ></textarea>
+        <textarea class="min-h-[60px] max-h-[500px] textInput" name="description" id="description" placeholder=" "></textarea>
         <span> Description </span>
       </div>
       <div class="pt-5">
         <span class="block">Select event type:</span>
         <div class="inline-block mr-5">
-          <input
-            type="radio"
-            id="typeChoice1"
-            name="type"
-            value="work"
-            class="peer appearance-none"
-          />
+          <input type="radio" id="typeChoice1" name="type" value="work" class="peer appearance-none" />
           <label
             for="typeChoice1"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-pink-main/40 border border-pink-main opacity-100 rounded-full transition duration-200 peer-checked:text-white"
@@ -69,13 +39,7 @@
           >
         </div>
         <div class="inline-block mr-5">
-          <input
-            type="radio"
-            id="typeChoice2"
-            name="type"
-            value="life"
-            class="peer appearance-none"
-          />
+          <input type="radio" id="typeChoice2" name="type" value="life" class="peer appearance-none" />
           <label
             for="typeChoice2"
             class="block px-5 py-2 min-w-[96px] text-center peer-checked:bg-blue-light/40 border border-blue-light rounded-full transition duration-200 peer-checked:text-white"
@@ -92,7 +56,7 @@
           />
         </div>
         <button @click="submit()" class="button-default">save</button>
-        <p>Position set on map: lat:{{lat}}  lang:{{lng}}</p>
+        <p>Position set on map: lat:{{ lat }} lang:{{ lng }}</p>
       </div>
     </form>
   </div>
@@ -108,31 +72,35 @@ export default {
       collapsed: false,
     };
   },
-  computed:{
-    lat(){
+  computed: {
+    lat() {
       return dataStore().getTempPos.lat;
     },
-    lng(){
+    lng() {
       return dataStore().getTempPos.lng;
     },
   },
   methods: {
     submit() {
-      const formData = new FormData(this.$refs['eventForm']);
+      const formData = new FormData(this.$refs["eventForm"]);
       let object = {};
-      formData.forEach((value, key) => object[key] = value);
+      formData.forEach((value, key) => (object[key] = value));
       const stringify = JSON.stringify(object);
       const json = JSON.parse(stringify);
-      
+
       const request = {
-          eventType : json['type'],
-          eventTitle: json['title'],
-          eventDescription: json['description'],
-          eventTime: json['meeting-time'],
-          longitude: this.lng,
-          latitude: this.lat
-      }
-      jwtFetch("http://localhost:8080/users/events",'POST',request);
+        eventType: json["type"],
+        eventTitle: json["title"],
+        eventDescription: json["description"],
+        eventTime: json["meeting-time"],
+        longitude: this.lng,
+        latitude: this.lat,
+      };
+      jwtFetch("http://localhost:8080/users/events", "POST", request).then(() => {
+        jwtFetch("http://localhost:8080/events", "GET").then((res) => {
+          dataStore().setUserEvents(res);
+        });
+      });
     },
     toggleForm() {
       this.collapsed = !this.collapsed;

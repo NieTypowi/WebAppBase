@@ -24,6 +24,7 @@
 
 <script>
 import { authStore } from "~/store/auth";
+import { dataStore } from "~/store/data";
 
 export default {
   setup() {
@@ -67,14 +68,16 @@ export default {
       }
     },
   },
-  mounted(){
-      const token = window.localStorage.getItem('token');
-      
-      if(token == '' || token == undefined){
-        this.$router.replace("/login")
-      }
-      
-  
-  }
+  mounted() {
+    const token = window.localStorage.getItem("token");
+
+    if (token == "" || token == undefined) {
+      this.$router.replace("/login");
+    }
+
+    jwtFetch("http://localhost:8080/events", "GET").then((res) => {
+      dataStore().setUserEvents(res);
+    });
+  },
 };
 </script>

@@ -110,7 +110,7 @@
         </div>
       </div>
       <div
-        class="relative p-5 w-full md: md:pl-[84px] bg-white/70 transition duration-300 rounded-r-2xl pointer-events-auto overflow-hidden"
+        class="relative p-5 w-full md: md:pl-[84px] bg-white/70 transition duration-300 rounded-r-2xl pointer-events-auto overflow-auto"
         :class="[collapsed ? 'md:-translate-x-full ' : 'md:translate-x-[-56px] md:backdrop-blur-md']"
       >
         <div class="absolute hidden md:block top-0 right-0" @click="toggleCollapse()">
