@@ -89,7 +89,7 @@
           </div>
         </div>
         <TransitionGroup> </TransitionGroup>
-        <div class="w-[300px] xl:w-[800px]"></div>
+        <div class="md:w-[300px] lg:w-[500px] xl:w-[800px]"></div>
       </div>
     </div>
   </div>

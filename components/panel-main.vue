@@ -214,7 +214,13 @@
         <!-- <div v-for="item in items">
             <slot name="item" v-bind="item"></slot>
           </div> -->
-        <div class="w-[400px]"></div>
+        <ul class="w-[200px] lg:w-[300px]">
+          <li class="w-full">
+            <section-events />
+          </li>
+          <li class="w-full"></li>
+          <li class="w-full"></li>
+        </ul>
       </div>
     </div>
   </div>
