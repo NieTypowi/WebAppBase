@@ -3,7 +3,9 @@
 </template>
 
 <script>
+import { dataStore } from "~/store/data";
 export default {
+
   data() {
     return {
       baseCoords: { lat: 0, lng: 0 },
@@ -37,6 +39,7 @@ export default {
         let lng = coord.lng;
         this.markerTempPos = { lat: lat, lng: lng };
         this.markerTemp = L.marker([this.markerTempPos.lat, this.markerTempPos.lng]).addTo(map);
+        dataStore().setTempPos(this.markerTempPos);
       });
     },
   },

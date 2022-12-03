@@ -90,26 +90,29 @@
             min="2018-06-07T00:00"
           />
         </div>
-        <div class="formText">
-          <input
-            type="number"
-            name="l1"
-            id="l1"
-            class="w-1/2 mt-5 border border-solid border-gray-300 rounded-[5px] px-5 py-[15px] text-base md:text-lg transition duration-200 focus-visible:border-purple-main focus-visible:outline-none"
-          />
-        </div>
+        <p>Position set on map: lat:{{lat}}  lang:{{lng}}</p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import { dataStore } from "~/store/data";
+
 export default {
   data() {
     return {
       isHovered: false,
       collapsed: false,
     };
+  },
+  computed:{
+    lat(){
+      return dataStore().getTempPos.lat;
+    },
+    lng(){
+      return dataStore().getTempPos.lng;
+    },
   },
   methods: {
     addEvent() {},
